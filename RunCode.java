@@ -4,11 +4,13 @@ import java.io.*;
 import org.apache.commons.io.*;
 
 public class RunCode{
-	String className;
 	String sourceCode;
+	final String CLASS = "REPL";
 	public RunCode(String sc){
-		className = "REPL";
 		sourceCode = sc;
+	}
+	private String toFile(){
+
 	}
 	public byte[] compile() throws IOException{
 		//@author caffeine-coma	// @website http://stackoverflow.com/questions/2130039/javacompiler-from-jdk-1-6-how-to-write-class-bytes-directly-to-byte-array
@@ -16,7 +18,7 @@ public class RunCode{
 
 		List<JavaSourceFromString> unitsToCompile = new ArrayList<JavaSourceFromString>() 
 			{{ 
-				 add(new JavaSourceFromString(className, sourceCode)); 
+				 add(new JavaSourceFromString(CLASS, sourceCode)); 
 			}};
 
 		StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
@@ -24,7 +26,7 @@ public class RunCode{
 		fileManager.close();    
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		FileInputStream fis = new FileInputStream(className + ".class");
+		FileInputStream fis = new FileInputStream(CLASS + ".class");
 		IOUtils.copy(fis, bos);
 
 		return bos.toByteArray();

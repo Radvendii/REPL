@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-public class REPL 
+public class StringHolder
 {
 	public ArrayList<String> orders;
 	public ArrayList<String> methods;
@@ -19,12 +19,12 @@ public class REPL
 		else
 			orders.add(entry);		
 	}
-	String file(){
+	String toFile(){
 		String base = "";
 		base = combine(imports, base);
-		base = base.concat(" public class REPL{");
+		base = base.concat(" public class " + RunCode.CLASS + "{");
 		base = combine(methods, base);
-		base = base.concat("String runner(){");
+		base = base.concat("String main(String[] args){");
 		base = combine(orders, base);
 		//check if method is void
 		base = base.concat("return "+orders.get(orders.size()) + ".toString()");
@@ -36,7 +36,6 @@ public class REPL
 			base = base.concat(anImport.toString());
 		return base;
 	}
-	public REPL(){}
 	public static void main(String[] args){
 		if (!(("(".matches("\\("))&&
 				("void add".matches("[a-zA-Z0-9]+ [a-zA-Z0-9]+"))&&
