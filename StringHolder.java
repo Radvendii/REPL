@@ -1,13 +1,20 @@
 import java.util.ArrayList;
-public class StringHolder 
+import java.util.regex.*;
+
+public class Java-Repl 
 {
 	public ArrayList<String> orders;
 	public ArrayList<String> methods;
 	public ArrayList<String> imports;
+	
 	void add(String entry){
-		if (entry.contains("import"))
+		entry.matches(" *import .*;");
+		if (entry.matches(" *import .*;"))
 			imports.add(entry);
-		else if (entry.contains("The non regex string to identify methods")) 
+		//something, a word, a space, a word, open paren, 
+		//any number of inputs, close paren, white space/newlines,
+		//curly brace, stuff, curlybrace at end.
+		else if (entry.matches(".*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]*\\{.*\\}"))
 			methods.add(entry);
 		else
 			orders.add(entry);
@@ -19,6 +26,7 @@ public class StringHolder
 		base = combine(methods, base);
 		base = base.concat("String runner(){");
 		base = combine(orders, base);
+		//check if method is void
 		base = base.concat("return "+orders.get(orders.size()) + ".toString()");
 		return base;
 	}
@@ -28,9 +36,8 @@ public class StringHolder
 			base = base.concat(anImport.toString());
 		return base;
 	}
-	
+
 	public static void main(String[] args){
 		System.out.println("dog".contains("d"));
 	}
 }
-
