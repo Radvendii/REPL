@@ -1,7 +1,8 @@
 import java.util.ArrayList;
-import java.util.regex.*;
+import java.util.regex.Pattern;
 
-public class REPL {
+public class REPL 
+{
 	public ArrayList<String> orders;
 	public ArrayList<String> methods;
 	public ArrayList<String> imports;
@@ -13,10 +14,10 @@ public class REPL {
 		//something, a word, a space, a word, open paren, 
 		//any number of inputs, close paren, white space/newlines,
 		//curly brace, stuff, curlybrace at end.
-		else if (entry.matches(".*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]+\\{.*\\}"))
+		else if (Pattern.compile(".*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]+\\{.*\\}", Pattern.DOTALL).matcher(entry).matches())
 			methods.add(entry);
 		else
-			orders.add(entry);
+			orders.add(entry);		
 	}
 	String file(){
 		String base = "";
@@ -37,17 +38,13 @@ public class REPL {
 	}
 	public REPL(){}
 	public static void main(String[] args){
-		//Debugging this Regular Expression Gives Evil eXasperation to me. 
-		//Currently working on the penultimate check.
-		//As soon as I figure out a sane way to deal with new lines from within Java's "regex" all will be good.
-		System.out.println("dog".matches("dog"));
-		System.out.println("(".matches("\\("));
-		System.out.println("void add".matches("[a-zA-Z0-9]+ [a-zA-Z0-9]+"));
-		System.out.println("(String entry)".matches("\\(.*\\)"));
-		System.out.println("void add(String entry)".matches("[a-zA-Z0-9]+ [a-zA-Z0-9]+\\(.*\\)"));
-		System.out.println("{ entry.matches(' *import .*;'); if (entry.matches(' *import .*;')) imports.add(entry); else if (entry.matches('.*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]*\\{.*\\}')) methods.add(entry); else orders.add(entry);}".matches(
-				"\\{.*?\\}"));
-		String sampleMethod = "void add(String entry) { entry.matches(' *import .*;'); if (entry.matches(' *import .*;')) imports.add(entry); else if (entry.matches('.*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]*\\{.*\\}')) methods.add(entry); else orders.add(entry);}";
-		System.out.println(sampleMethod.matches("[a-zA-Z0-9]+ [a-zA-Z0-9]+\\(.*\\)[ \n\t]*\\{.*\\}"));
+		if (!(("(".matches("\\("))&&
+				("void add".matches("[a-zA-Z0-9]+ [a-zA-Z0-9]+"))&&
+				("(String entry)".matches("\\(.*\\)"))&&
+				("void add(String entry)".matches("[a-zA-Z0-9]+ [a-zA-Z0-9]+\\(.*\\)"))&&
+				("{  n\t]*\\.*\\')) methods.add(entry); else orders.add(entry);}".matches("\\{.+\\}"))&&
+				(Pattern.compile(".*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]+\\{.*\\}", Pattern.DOTALL).matcher(
+						"void add(String entry) { entry.matches(' *import .*;'); if (entry.matches(' *import .*;')) imports.add(entry); else if (entry.matches('.*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]*\\{.*\\}')) methods.add(entry); else orders.add(entry);}").matches())))
+			System.out.println("Failure!");
 	}
 }
