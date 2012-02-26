@@ -9,9 +9,6 @@ public class RunCode{
 	public RunCode(String sc){
 		sourceCode = sc;
 	}
-	private String toFile(){
-
-	}
 	public byte[] compile() throws IOException{
 		//@author caffeine-coma	// @website http://stackoverflow.com/questions/2130039/javacompiler-from-jdk-1-6-how-to-write-class-bytes-directly-to-byte-array
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
