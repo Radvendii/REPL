@@ -19,20 +19,21 @@ public class StringHolder
 		//something, a word, a space, a word, open paren, 
 		//any number of inputs, close paren, white space/newlines,
 		//curly brace, stuff, curlybrace at end.
-		else if (Pattern.compile(".*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]+\\{.*\\}", Pattern.DOTALL).matcher(entry).matches())
-			methods.add(entry);
+		else if (entry.matches("}.*"))//Pattern.compile(".*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]+\\{.*\\}", Pattern.DOTALL).matcher(entry).matches())
+			methods.add(entry.substring(1));
 		else
 			orders.add(entry);		
 	}
 	String toFile(){
-		String base = "\\\\File that holds everything inputed in the REPL\n";
+		String base = "";
 		base = combine(imports, base);
 		base = base.concat(" public class " + RunCode.CLASS + "{");
 		base = combine(methods, base);
-		base = base.concat("String main(String[] args){");
+		base = base.concat("public static void main(String[] args){");
 		base = combine(orders, base);
 		//check if method is void
-		base = base.concat("return "+orders.get(orders.size()) + ".toString()");
+		base = base.concat("System.out.println( "+orders.get(orders.size()-1).substring(0,orders.get(orders.size()-1).length()-1)+".toString());");
+		base = base.concat("}}");
 		return base;
 	}
 	static private String combine(ArrayList<String> adder, String base){
