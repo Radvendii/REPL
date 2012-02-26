@@ -20,7 +20,7 @@ public class StringHolder
 			orders.add(entry);		
 	}
 	String toFile(){
-		String base = "";
+		String base = "\\\\File that holds everything inputed in the REPL\n";
 		base = combine(imports, base);
 		base = base.concat(" public class " + RunCode.CLASS + "{");
 		base = combine(methods, base);
