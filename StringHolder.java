@@ -7,6 +7,11 @@ public class StringHolder
 	public ArrayList<String> methods;
 	public ArrayList<String> imports;
 	
+	public StringHolder(){
+		orders = new ArrayList<String>();
+		methods = new ArrayList<String>();
+		imports = new ArrayList<String>();
+	}
 	void add(String entry){
 		entry.matches(" *import .*;");
 		if (entry.matches(" *import .*;"))
