@@ -27,19 +27,19 @@ public class StringHolder
 	String toFile(){
 		String base = "";
 		base = combine(imports, base);
-		base = base.concat(" public class " + RunCode.CLASS + "{");
+		base = base.concat(" public class " + RunCode.CLASS + "{\n");
 		base = combine(methods, base);
-		base = base.concat("public static void main(String[] args){");
+		base = base.concat("public static void main(String[] args){\n");
 		base = combine(orders, base);
 		//check if method is void
-		base = base.concat("System.out.println( "+orders.get(orders.size()-1).substring(0,orders.get(orders.size()-1).length()-1)+".toString());");
-		base = base.concat("}}");
+		base = base.concat("System.out.println( "+orders.get(orders.size()-1).substring(0,orders.get(orders.size()-1).length()-1)+".toString());\n");
+		base = base.concat("}\n}");
 		return base;
 	}
 	static private String combine(ArrayList<String> adder, String base){
 		Object[] hold = adder.toArray();
 		for (Object anImport : hold)
-			base = base.concat(anImport.toString());
+			base = base.concat(anImport.toString() + "\n");
 		return base;
 	}
 	public static void main(String[] args){
