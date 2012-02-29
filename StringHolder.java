@@ -19,15 +19,10 @@ public class StringHolder
 		imports = new ArrayList<String>();
 	}
 	/**
-	 * Takes in a string and returns the updated String that the file should be.
+	 * Takes in a string that should be added.
 	 * @param entry The string that is to be added to the file
-	 * @return the new string that should be compiled into a file.
 	 */
-	String process(String entry){
-		add(entry);
-		return toFile();
-	}
-	private void add(String entry){
+	void add(String entry){
 		entry.matches(" *import .*;");
 		if (entry.matches(" *import .*;"))
 			imports.add(entry);
@@ -39,7 +34,11 @@ public class StringHolder
 		else
 			orders.add(entry);		
 	}
-	private String toFile(){
+	/**
+	 * Returns the updated String that  should be compiled
+	 * @return the new string that should be compiled into a file.
+	 */
+	String toFile(){
 		String base = "";
 		base = combine(imports, base);
 		base = base.concat(" public class " + RunCode.CLASS + "{\n");
