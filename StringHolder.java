@@ -1,30 +1,45 @@
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-
+/**
+ * <code>StringHolder</code> takes in strings from the input loop and
+ * returns the proper file. Use the process method.
+ * @author Keller Scholl keller.scholl@gmail.com
+ * @since 29/3/12
+ */
 public class StringHolder
-{
+{	//Standard declaration of the ArrayLists that will contain the individual strings,
+	//divided by type, in the order that they were entered.
 	public ArrayList<String> orders;
 	public ArrayList<String> methods;
 	public ArrayList<String> imports;
-	
+	//Default Constructor
 	public StringHolder(){
 		orders = new ArrayList<String>();
 		methods = new ArrayList<String>();
 		imports = new ArrayList<String>();
 	}
-	void add(String entry){
+	/**
+	 * Takes in a string and returns the updated String that the file should be.
+	 * @param entry The string that is to be added to the file
+	 * @return the new string that should be compiled into a file.
+	 */
+	String process(String entry){
+		add(entry);
+		return toFile();
+	}
+	private void add(String entry){
 		entry.matches(" *import .*;");
 		if (entry.matches(" *import .*;"))
 			imports.add(entry);
 		//something, a word, a space, a word, open paren, 
 		//any number of inputs, close paren, white space/newlines,
 		//curly brace, stuff, curlybrace at end.
-		else if (entry.matches("}.*"))//Pattern.compile(".*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]+\\{.*\\}", Pattern.DOTALL).matcher(entry).matches())
+		else if (entry.matches("}.*"))
 			methods.add(entry.substring(1));
 		else
 			orders.add(entry);		
 	}
-	String toFile(){
+	private String toFile(){
 		String base = "";
 		base = combine(imports, base);
 		base = base.concat(" public class " + RunCode.CLASS + "{\n");
@@ -42,6 +57,7 @@ public class StringHolder
 			base = base.concat(anImport.toString() + "\n");
 		return base;
 	}
+	//Editin
 	public static void main(String[] args){
 		//Test code
 		if (!(("(".matches("\\("))&&
