@@ -1,3 +1,7 @@
+/*
+ *The purpose of this code is to test both StringHolder and RunCode
+*/
+
 import java.io.*;
 public class test{
 	public static void main(String[] args)throws IOException{
