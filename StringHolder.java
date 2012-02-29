@@ -43,6 +43,7 @@ public class StringHolder
 		return base;
 	}
 	public static void main(String[] args){
+		//Test code
 		if (!(("(".matches("\\("))&&
 				("void add".matches("[a-zA-Z0-9]+ [a-zA-Z0-9]+"))&&
 				("(String entry)".matches("\\(.*\\)"))&&
