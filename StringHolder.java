@@ -13,6 +13,7 @@ public class StringHolder
 	public ArrayList<String> orders;
 	public ArrayList<String> methods;
 	public ArrayList<String> imports;
+	public lastEntryWasOrder = false;
 	//Default Constructor
 	public StringHolder(){
 		orders = new ArrayList<String>();
@@ -27,13 +28,16 @@ public class StringHolder
 		entry.matches(" *import .*;");
 		if (entry.matches(" *import .*;"))
 			imports.add(entry);
+			lastEntryWasOrder = false;
 		//something, a word, a space, a word, open paren, 
 		//any number of inputs, close paren, white space/newlines,
 		//curly brace, stuff, curlybrace at end.
 		else if (entry.matches("}.*"))
 			methods.add(entry.substring(1));
+			lastEntryWasOrder = false;
 		else
-			orders.add(entry);		
+			orders.add(entry);
+			lastEntryWasOrder = true;
 	}
 	/**
 	 * Returns the updated String that  should be compiled
@@ -47,7 +51,7 @@ public class StringHolder
 		base = base.concat("public static void main(String[] args){\n");
 		base = combine(orders, base);
 		//check if method is void
-		base = base.concat("System.out.println( "+orders.get(orders.size()-1).substring(0,orders.get(orders.size()-1).length()-1)+".toString());\n");
+		if (lastEntryWasOrder) base = base.concat("System.out.println( "+orders.get(orders.size()-1).substring(0,orders.get(orders.size()-1).length()-1)+".toString());\n");
 		base = base.concat("}\n}");
 		return base;
 	}
