@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 /**
  * <code>StringHolder</code> takes in strings from the input loop and
- * returns the proper file. Use the process method.
+ * returns the proper file. Use add to put a string in, and toFile to 
+ * get the string to be turned into a file.
  * @author Keller Scholl keller.scholl@gmail.com
  * @since 29/3/12
  */
@@ -55,17 +56,5 @@ public class StringHolder
 		for (Object anImport : hold)
 			base = base.concat(anImport.toString() + "\n");
 		return base;
-	}
-	//Editin
-	public static void main(String[] args){
-		//Test code
-		if (!(("(".matches("\\("))&&
-				("void add".matches("[a-zA-Z0-9]+ [a-zA-Z0-9]+"))&&
-				("(String entry)".matches("\\(.*\\)"))&&
-				("void add(String entry)".matches("[a-zA-Z0-9]+ [a-zA-Z0-9]+\\(.*\\)"))&&
-				("{  n\t]*\\.*\\')) methods.add(entry); else orders.add(entry);}".matches("\\{.+\\}"))&&
-				(Pattern.compile(".*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]+\\{.*\\}", Pattern.DOTALL).matcher(
-						"void add(String entry) { entry.matches(' *import .*;'); if (entry.matches(' *import .*;')) imports.add(entry); else if (entry.matches('.*?[a-zA-Z0-9]* [a-zA-Z0-9]*\\(.*\\)[ \n\t]*\\{.*\\}')) methods.add(entry); else orders.add(entry);}").matches())))
-			System.out.println("Failure!");
 	}
 }
