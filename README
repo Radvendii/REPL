@@ -1,3 +1,9 @@
 The org folder is for importing org.apache.io.* (this can be found at http://commons.apache.org/io/)
 
  --The Win Monkeys
+
+
+JavaSourceFromString.java: No clue
+README: General information
+REPL.java: Where the eventual code will be
+RunCode.java: 
