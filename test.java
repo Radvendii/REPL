@@ -8,19 +8,20 @@ public class test{
 		comms.add("import java.io.*;");
 		comms.add("}public static String fisch(){return \"fisch\";};");
 		comms.add("fisch();");
-		comms.add("int a = 5;");
+	//	comms.add("int a = 5;"); //doesn't work yet
 		RunCode run = new RunCode(comms.toFile());
-		System.out.println(comms.toFile());
+		System.out.println(comms.toFile()); //debug
 		run.comprun();
 	}
+/*
 	public static void testforGoodInput(){
 		StringHolder unsafe = new StringHolder();
-		StringHolder safe = new Stringholder();
+		StringHolder safe = new StringHolder();
 		RunCode run = new RunCode(unsafe.toFile());
 		String currentInput = "char j = 'k'";
 		unsafe.add(currentInput);
 		try{
-			run = RunCode(unsafe.toFile());
+			run = new RunCode(unsafe.toFile());
 			safe.add(currentInput);
 			
 		}
@@ -38,4 +39,6 @@ public class test{
 		}
 		
 	}
+*/
 }
+
