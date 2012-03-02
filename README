@@ -1,21 +1,22 @@
-Introduction to Java-REPL
-To start the program, run Main. It will prompt you for an input. 
+Introduction to REPL in Java
+To start the program, run Shell. It will prompt you for an input. 
 Imports will be handled normally. 
-All orders("int a = 5;" and the like) will be put into main.
-To enter a method, use a } at the start.
-Example run:
-$Java-REPL Shell
-"Please begin input"
-$import java.util.List;
-$int a = 5;
+All orders("int a = 5;" and the like) will be put into REPL.main().
+To enter a method, use a } at the start of the line.
+Example run($=bash prompt; >=our prompt; >>=Shell's response):
+$java Shell
+>import java.util.List;
+>}public static String foo{return "bar";} //NOTE: as of now, you must declare every method as static.
+>int a = 5;
+>>5 //NOTE: doesn't work yet (won't print an "int x = y" statement)
 
 //Note to KellerKeller, continue writing this when main is viewable.
-
-The org folder is for importing org.apache.io.* (this can be found at http://commons.apache.org/io/)
---The Win Monkeys
-
+* Documentation:
 
 JavaSourceFromString.java: No clue
 README: General information
 REPL.java: Where the eventual code will be
 RunCode.java: 
+
+The org folder is for importing org.apache.io.* (this can be found at http://commons.apache.org/io/)
+	--The Win Monkeys
