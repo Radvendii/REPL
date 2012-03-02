@@ -12,7 +12,7 @@ public class StringHolder
 	public ArrayList<String> orders;
 	public ArrayList<String> methods;
 	public ArrayList<String> imports;
-	public boolean lastEntryWasOrder = false;
+	public String lastEntry = "none";
 	//Default Constructor
 	public StringHolder(){
 		orders = new ArrayList<String>();
@@ -27,15 +27,15 @@ public class StringHolder
 		entry.matches(" *import .*;");
 		if (entry.matches(" *import .*;")){
 			imports.add(entry);
-			lastEntryWasOrder = false;
+			lastEntry = "import";
 		}
 		else if (entry.matches("}.*")){
 			methods.add(entry.substring(1));
-			lastEntryWasOrder = false;
+			lastEntry = "method";
 		}
 		else
 			orders.add(entry);
-			lastEntryWasOrder = true;
+			lastEntry = "order";
 	}
 	/**
 	 * Returns the updated String that  should be compiled
@@ -49,7 +49,7 @@ public class StringHolder
 		base = base.concat("public static void main(String[] args){\n");
 		base = combine(orders.subList(0, (orders.size()-2)>0 ? orders.size()-2 : 0), base);
 		//still get error about void methods
-		if (lastEntryWasOrder) base = base.concat("System.out.println( "+orders.get(orders.size()-1).substring(0,orders.get(orders.size()-1).length()-1)+");\n");
+		if (lastEntry.equals("order")) base = base.concat("System.out.println( "+orders.get(orders.size()-1).substring(0,orders.get(orders.size()-1).length()-1)+");\n");
 		base = base.concat("}\n}");
 		return base;
 	}
