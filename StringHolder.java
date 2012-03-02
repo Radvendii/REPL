@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.regex.Pattern;
+import java.util.*;
 /**
  * <code>StringHolder</code> takes in strings from the input loop and
  * returns the proper file. Use add to put a string in, and toFile to 
@@ -13,7 +12,7 @@ public class StringHolder
 	public ArrayList<String> orders;
 	public ArrayList<String> methods;
 	public ArrayList<String> imports;
-	public lastEntryWasOrder = false;
+	public boolean lastEntryWasOrder = false;
 	//Default Constructor
 	public StringHolder(){
 		orders = new ArrayList<String>();
@@ -26,15 +25,14 @@ public class StringHolder
 	 */
 	void add(String entry){
 		entry.matches(" *import .*;");
-		if (entry.matches(" *import .*;"))
+		if (entry.matches(" *import .*;")){
 			imports.add(entry);
 			lastEntryWasOrder = false;
-		//something, a word, a space, a word, open paren, 
-		//any number of inputs, close paren, white space/newlines,
-		//curly brace, stuff, curlybrace at end.
-		else if (entry.matches("}.*"))
+		}
+		else if (entry.matches("}.*")){
 			methods.add(entry.substring(1));
 			lastEntryWasOrder = false;
+		}
 		else
 			orders.add(entry);
 			lastEntryWasOrder = true;
@@ -49,13 +47,13 @@ public class StringHolder
 		base = base.concat(" public class " + RunCode.CLASS + "{\n");
 		base = combine(methods, base);
 		base = base.concat("public static void main(String[] args){\n");
-		base = combine(orders, base);
-		//check if method is void
-		if (lastEntryWasOrder) base = base.concat("System.out.println( "+orders.get(orders.size()-1).substring(0,orders.get(orders.size()-1).length()-1)+".toString());\n");
+		base = combine(orders.subList(0, (orders.size()-2)>0 ? orders.size()-2 : 0), base);
+		//still get error about void methods
+		if (lastEntryWasOrder) base = base.concat("System.out.println( "+orders.get(orders.size()-1).substring(0,orders.get(orders.size()-1).length()-1)+");\n");
 		base = base.concat("}\n}");
 		return base;
 	}
-	static private String combine(ArrayList<String> adder, String base){
+	static private String combine(List<String> adder, String base){
 		Object[] hold = adder.toArray();
 		for (Object anImport : hold)
 			base = base.concat(anImport.toString() + "\n");
