@@ -1,5 +1,6 @@
 /*
- *The purpose of this code is to test both StringHolder and RunCode
+ *The purpose of this code is to test StringHolder and RunCode
+ * NOTE: Does not test Shell.java
 */
 import java.io.*;
 public class test{
@@ -7,12 +8,17 @@ public class test{
 		StringHolder comms = new StringHolder();
 		comms.add("import java.io.*;");
 		comms.add("}public static String fisch(){return \"fisch\";};");
+		comms.add("int i;");
+		comms.add("i=5");
 		comms.add("fisch();");
 	//	comms.add("int a = 5;"); //doesn't work yet
 		RunCode run = new RunCode(comms.toFile());
-		System.out.println(comms.toFile()); //debug
+	//	System.out.println(comms.toFile()); //debug
 		run.comprun();
 	}
+
+//TODO: raptortech97, make this work
+		//and update testRes if you could, with what this file should print out
 /*
 	public static void testforGoodInput(){
 		StringHolder unsafe = new StringHolder();
