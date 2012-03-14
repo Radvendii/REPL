@@ -1,5 +1,5 @@
 /*
- * No clue what this does yet.
+ * Compiles source code into a .class file and then runs it.
  *
 */
 
@@ -18,6 +18,7 @@ public class RunCode{
 		sourceCode = sc;
 	}
 	public byte[] compile() throws IOException{
+		//taken from the internet:
 		//@author caffeine-coma	// @website http://stackoverflow.com/questions/2130039/javacompiler-from-jdk-1-6-how-to-write-class-bytes-directly-to-byte-array
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 
@@ -36,9 +37,11 @@ public class RunCode{
 
 		return bos.toByteArray();
 	}
+	/*runs REPL.main(), the file created by this.compile()*/
 	public void run(){
-		REPL.main(new String[0]);
+		REPL.main(new String[0]); //main needs to be called with a String array, so initialize an empty one
 	}
+	/* compile and run in one step */
 	public void comprun() throws IOException{
 		compile();
 		run();
