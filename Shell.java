@@ -1,3 +1,4 @@
+/*Main java file for the project, gives a prompt and initiates the REPL*/
 public class Shell
 {
  private final String prompt = ">";
@@ -10,7 +11,7 @@ public class Shell
      String in = getStringFromShell(prompt);
      comms.add(in);
      RunCode run = new RunCode(comms.toFile());
-         System.out.println(comms.toFile());
+         System.out.println(comms.toFile()); //DEBUG
                   run.comprun();
    }
  }
