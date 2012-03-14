@@ -1,5 +1,5 @@
 /*
- *No clue what this does. 
+ * Constructs a compileable source file from a class name and the code 
 */
 
 
